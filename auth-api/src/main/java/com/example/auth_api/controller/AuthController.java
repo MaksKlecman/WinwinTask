@@ -1,11 +1,10 @@
 package com.example.auth_api.controller;
 
 
-import com.example.auth_api.dto.LoginRequest;
-import com.example.auth_api.dto.LoginResponse;
-import com.example.auth_api.dto.RegisterRequest;
+import com.example.auth_api.dto.*;
 import com.example.auth_api.service.UserService;
 import jakarta.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final UserService userService;
+
 
     public AuthController(UserService userService)
     {
@@ -40,5 +40,7 @@ public class AuthController {
         LoginResponse response = new LoginResponse(token);
         return ResponseEntity.ok(response);
     }
+
+
 
 }
