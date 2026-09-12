@@ -2,6 +2,9 @@ package com.example.auth_api.controller;
 
 import com.example.auth_api.dto.ProcessRequest;
 import com.example.auth_api.dto.ProcessResponse;
+import com.example.auth_api.model.ProcessingLog;
+import com.example.auth_api.repository.ProcessRepository;
+import com.example.auth_api.repository.UserRepository;
 import com.example.auth_api.service.ProcessingService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -15,9 +18,11 @@ public class ProcessController {
 
     private final ProcessingService processingService;
 
+
     public ProcessController( ProcessingService processingService)
     {
         this.processingService = processingService;
+
     }
 
     @PostMapping("/api/process")
@@ -25,7 +30,9 @@ public class ProcessController {
 
         String email = authentication.getName();
 
-        String result = processingService.callDataApi(request.getText());
+        String result = processingService.processText(email,request.getText());
+
+
 
         ProcessResponse response = new ProcessResponse(result);
         return ResponseEntity.ok(response);
